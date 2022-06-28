@@ -1,0 +1,199 @@
+﻿<Window x:Class="TaskProperties.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:TaskProperties"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        mc:Ignorable="d"
+        Title="TaskProperties" Height="500" Width="495" ResizeMode="NoResize" Background="#FFE6E6E6">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="10"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="410"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="TabControl1" Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1">
+            <TabItem x:Name="General" Header="General">
+                <Grid Background="#FFF0F0F0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="Block1" Grid.Column="1" Text="Name:" FontFamily="Times New Roman" VerticalAlignment="Center"/>
+                    <TextBox x:Name="GeneralName" Grid.Row="0" Grid.Column="2" Width="200" FontFamily="Times New Roman" Height="25" HorizontalAlignment="Left" VerticalContentAlignment="Center"/>
+                    <TextBlock x:Name="Block2" Grid.Row="1" Grid.Column="1" Text="Description:" FontFamily="Times New Roman" VerticalAlignment="Top"/>
+                    <TextBox x:Name="GeneralDescription" Grid.Row="1" Grid.Column="2" FontFamily="Times New Roman" Width="200" Height="100" HorizontalAlignment="Left" VerticalScrollBarVisibility="Visible"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Configuration" Header="Configuration">
+                <Grid  Background="#FFF0F0F0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="Block3" Grid.Column="1" Text="Type:" FontFamily="Times New Roman" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ComboBox1" Grid.Row="0" Grid.Column="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsSource="{Binding GetTypeList}" SelectedIndex="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding TypeChoose}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBlock x:Name="Block4" Grid.Row="1" Grid.Column="1" Text="Watching:" FontFamily="Times New Roman" VerticalAlignment="Center"/>
+                    <TextBox x:Name="ConfigurationInput1" Grid.Row="1" Grid.Column="2" Width="80" Text="500.000" FontFamily="Times New Roman" MaxLength="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding CorrectInput}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <TextBlock x:Name="ms" Grid.Column="2" Grid.Row="1" Text="ms" FontFamily="Times New Roman" VerticalAlignment="Center" Margin="85,0,0,0"/>
+                    <CheckBox x:Name="CheckBox1" Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" Content="Disable automatic output processing to reduce task overhead" VerticalAlignment="Center" FontFamily="Times New Roman" ></CheckBox>
+                    <CheckBox x:Name="CheckBox2" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="3" Content="Inhibit task" VerticalAlignment="Center" FontFamily="Times New Roman"></CheckBox>
+                    <TextBlock x:Name="Block5" Grid.Row="1" Grid.Column="1" Text="Period:" FontFamily="Times New Roman" Visibility="Hidden" VerticalAlignment="Center"/>
+                    <TextBox x:Name="ConfigurationInput2" Visibility="Hidden" Grid.Row="1" Grid.Column="2" Width="80" Text="10.000" FontFamily="Times New Roman" MaxLength="10" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding CorrectInput2}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <TextBlock x:Name="ms2" Grid.Column="2" Grid.Row="1" Text="ms" FontFamily="Times New Roman" Visibility="Hidden" VerticalAlignment="Center" Margin="85,0,0,0"/>
+                    <TextBlock x:Name="ms3" Grid.Column="3" Grid.Row="3" Text="ms" FontFamily="Times New Roman" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block7" Grid.Row="1" Grid.Column="1" Text="Priority:" FontFamily="Times New Roman" Visibility="Hidden" VerticalAlignment="Center"/>
+                    <TextBox x:Name="ConfigurationInput3" Text="10" FontFamily="Times New Roman"  Grid.Row="1" Grid.Column="2" Width="80" Height="18" MaxLength="5" HorizontalAlignment="Left" Visibility="Hidden">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding CorrectInput3}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                    <TextBlock x:Name="Warnning" Grid.Row="8" Grid.Column="2" Text="Error, input must be a number!" FontFamily="Times New Roman" FontSize="13" Visibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Center"  Foreground="#FFFF0000"/>
+                    <TextBlock x:Name="Block8" Visibility="Hidden" Grid.Column="2" Grid.Row="1" Grid.ColumnSpan="2" Text="(Lower number yields higher priority)" FontFamily="Times New Roman" VerticalAlignment="Center" Margin="85,0,0,0"/>
+                    <TextBlock x:Name="Block6" Grid.Row="1" Grid.Column="1" Text="Trigger:" FontFamily="Times New Roman" Visibility="Hidden" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="ComboBox2" Grid.Row="1" Grid.Column="2" Width="200" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsSource="{Binding GetTriggerList}" SelectedIndex="0">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding TagChoose}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ComboBox>
+                    <TextBlock x:Name="Block9" Grid.Row="2" Grid.Column="1" Text="Tag:" FontFamily="Times New Roman" Visibility="Hidden" VerticalAlignment="Center"/>
+                    <TextBox x:Name="ComboBox3" Grid.Row="2" Grid.Column="2"  Width="200" Visibility="Hidden" HorizontalAlignment="Left" VerticalAlignment="Center" Text="&lt;None&gt;"/>
+                    <CheckBox x:Name="CheckBox4" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" Visibility="Hidden" Width="200" Content="Execute task if no event occurs within" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="Times New Roman" Command="{Binding Check}"></CheckBox>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Schedule" Header="Program Schedule">
+                <Grid Background="#FFF0F0F0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="150"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition Width="20"></ColumnDefinition>
+                        <ColumnDefinition Width="150"></ColumnDefinition>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="Block10" Grid.Row="0" Grid.Column="1" Text="Unscheduled:" FontFamily="Times New Roman" VerticalAlignment="Bottom"/>
+                    <TextBlock x:Name="Block11" Grid.Row="0" Grid.Column="3" Text="Scheduled:" FontFamily="Times New Roman" VerticalAlignment="Bottom"/>
+                    <TextBlock x:Name="Block12" Grid.Row="1" Grid.Column="4" Text="Move" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <ListView x:Name="ListView1" Grid.Row="1" Grid.Column="1" Width="150" Height="150" FontFamily="Times New Roman" SelectedIndex="0" ItemsSource="{Binding GetUnscheduled}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding Right}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                    <ListView x:Name="ListView2" Grid.Row="1" Grid.Column="3" Width="150" Height="150" FontFamily="Times New Roman" SelectedIndex="0" ItemsSource="{Binding GetScheduled}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseDoubleClick">
+                                <i:InvokeCommandAction Command="{Binding Left}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ListView>
+                    <Button x:Name="Add" Content="Add→"  FontFamily="Times New Roman" Grid.Row="2" Grid.Column="1" Width="70" Height="20" Command="{Binding Right}"></Button>
+                    <Button x:Name="Remove" Content="←Remove" FontFamily="Times New Roman" Grid.Row="2" Grid.Column="3" Width="70" Height="20" Command="{Binding Left}"></Button>
+                    <Button x:Name="Up" Content="↑" FontFamily="Times New Roman" Grid.Row="1" Grid.Column="4" Width="20" Height="20" Margin="0,0,0,50" Command="{Binding Up}"></Button>
+                    <Button x:Name="Down" Content="↓" FontFamily="Times New Roman" Grid.Row="1" Grid.Column="4" Width="20" Height="20" Margin="0,50,0,0" Command="{Binding Down}"></Button>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="Monitor" Header="Monitor">
+                <Grid Background="#FFF0F0F0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition Width="100"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="35"/>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock x:Name="Block13" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" Text="Scan times(elapsed time):" FontFamily="Times New Roman" VerticalAlignment="Bottom"/>
+                    <TextBlock x:Name="Block14" Grid.Row="1" Grid.Column="1" Text="Max:" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block15" Grid.Row="2" Grid.Column="1" Text="Min:" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block16" Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="4" Text="Interval times(elapsed time between trigger):" FontFamily="Times New Roman" VerticalAlignment="Bottom"/>
+                    <TextBlock x:Name="Block17" Grid.Row="4" Grid.Column="1" Text="Max:" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block18" Grid.Row="5" Grid.Column="1" Text="Min:" FontFamily="Times New Roman" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block19" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="4" Text="Task overlap count:" FontFamily="Times New Roman" VerticalAlignment="Bottom"/>
+                    <TextBlock x:Name="Block20" Grid.Row="1" Grid.Column="3" Text="ms" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block21" Grid.Row="2" Grid.Column="3" Text="ms" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block22" Grid.Row="4" Grid.Column="3" Text="ms" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block23" Grid.Row="5" Grid.Column="3" Text="ms" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="Block24" Grid.Row="1" Grid.Column="5" Text="←" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                    <TextBox x:Name="MonitorInput1" Grid.Row="1" Grid.Column="2" Width="110" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+                    <TextBox x:Name="MonitorInput2" Grid.Row="2" Grid.Column="2" Width="110" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+                    <TextBox x:Name="MonitorInput3" Grid.Row="4" Grid.Column="2" Width="110" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+                    <TextBox x:Name="MonitorInput4" Grid.Row="5" Grid.Column="2" Width="110" FontFamily="Times New Roman" HorizontalAlignment="Left" VerticalAlignment="Center" IsEnabled="False"/>
+                    <Button x:Name="Reset" Content="Reset" FontFamily="Times New Roman" Grid.Row="1" Grid.Column="4" Height="20" Width="80" IsEnabled="False"></Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="Yes" Content="确定" Width="80" Height="25" Grid.Column="2" Grid.Row="2" VerticalAlignment="Center" Command="{Binding Yes}"/>
+        <Button x:Name="No" Content="取消" Width="80" Height="25" Grid.Column="3" Grid.Row="2" VerticalAlignment="Center" Command="{Binding No}"/>
+        <Button x:Name="App" Content="应用(A)" Width="80" Height="25" Grid.Column="4" Grid.Row="2" VerticalAlignment="Center" Command="{Binding App}"/>
+        <Button x:Name="Help" Content="帮助" Width="80" Height="25" Grid.Column="5" Grid.Row="2" VerticalAlignment="Center" Command="{Binding Help}"/>
+    </Grid>
+</Window>
